@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 import com.github.mzule.activityrouter.annotation.Modules;
 import com.github.mzule.activityrouter.router.RouterCallback;
@@ -30,6 +31,8 @@ public class App extends Application implements RouterCallbackProvider {
             @Override
             public void onOpen(Context context, Intent intent, Uri uri) {
                 super.onOpen(context, intent, uri);
+                String main = uri.getHost();
+                Log.d("app", main);
             }
 
             @Override
