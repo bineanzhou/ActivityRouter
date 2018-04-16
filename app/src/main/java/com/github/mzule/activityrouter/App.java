@@ -1,14 +1,14 @@
 package com.github.mzule.activityrouter;
 
-import com.github.mzule.activityrouter.annotation.Modules;
-import com.github.mzule.activityrouter.router.RouterCallback;
-import com.github.mzule.activityrouter.router.RouterCallbackProvider;
-import com.github.mzule.activityrouter.router.SimpleRouterCallback;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
+import com.github.mzule.activityrouter.annotation.Modules;
+import com.github.mzule.activityrouter.router.RouterCallback;
+import com.github.mzule.activityrouter.router.RouterCallbackProvider;
+import com.github.mzule.activityrouter.router.SimpleRouterCallback;
 
 /**
  * Created by CaoDongping on 4/6/16.
@@ -25,6 +25,11 @@ public class App extends Application implements RouterCallbackProvider {
                     return true;
                 }
                 return false;
+            }
+
+            @Override
+            public void onOpen(Context context, Intent intent, Uri uri) {
+                super.onOpen(context, intent, uri);
             }
 
             @Override

@@ -1,14 +1,14 @@
 package com.github.mzule.activityrouter.router;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created by CaoDongping on 4/6/16.
@@ -83,7 +83,7 @@ public class Routers {
         }
 
         try {
-            success = doOpen(context, uri, requestCode);
+            success = doOpen(context, uri, requestCode, callback);
         } catch (Throwable e) {
             e.printStackTrace();
             if (callback != null) {
@@ -119,7 +119,7 @@ public class Routers {
         return null;
     }
 
-    private static boolean doOpen(Context context, Uri uri, int requestCode) {
+    private static boolean doOpen(Context context, Uri uri, int requestCode, RouterCallback callback) {
         initIfNeed();
         Path path = Path.create(uri);
         for (Mapping mapping : mappings) {
@@ -136,11 +136,19 @@ public class Routers {
                 }
                 if (requestCode >= 0) {
                     if (context instanceof Activity) {
+                        if(callback!=null)
+                        {
+                            callback.onOpen(context, intent, uri);
+                        }
                         ((Activity) context).startActivityForResult(intent, requestCode);
                     } else {
                         throw new RuntimeException("can not startActivityForResult context " + context);
                     }
                 } else {
+                    if(callback!=null)
+                    {
+                        callback.onOpen(context, intent, uri);
+                    }
                     context.startActivity(intent);
                 }
                 return true;

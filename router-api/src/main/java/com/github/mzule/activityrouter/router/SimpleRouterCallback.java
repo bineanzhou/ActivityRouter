@@ -1,6 +1,7 @@
 package com.github.mzule.activityrouter.router;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 
 /**
@@ -14,6 +15,10 @@ public class SimpleRouterCallback implements RouterCallback {
     @Override
     public boolean beforeOpen(Context context, Uri uri) {
         return false;
+    }
+
+    @Override
+    public void onOpen(Context context, Intent intent, Uri uri) {
     }
 
     @Override
